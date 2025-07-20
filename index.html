@@ -1,163 +1,171 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Визитка</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Твоя визиточка</title>
   <style>
     :root {
-      --main-color: #1e3a8a;
-      --bg1: #dbeafe;
-      --bg2: #eff6ff;
+      --bg: #f3f6fb;
+      --text: #1e2a38;
+      --accent: #88aadd;
     }
 
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, var(--bg1), var(--bg2));
-      color: var(--main-color);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
       min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      max-width: 400px;
+      width: 100%;
       text-align: center;
-      overflow-x: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 10;
     }
 
     .avatar {
-      margin-top: 30px;
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      border: 3px solid var(--main-color);
+      width: 100px;
+      height: 100px;
       object-fit: cover;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-      animation: float 3s ease-in-out infinite;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      border: 3px solid var(--accent);
     }
 
     h1 {
-      font-size: 2em;
-      margin: 20px 0 10px;
-    }
-
-    p {
-      font-size: 1.1em;
-      margin: 4px 0;
-    }
-
-    .links {
-      margin-top: 20px;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .links a {
       display: inline-block;
-      margin: 0.5em;
-      padding: 0.5em 1.2em;
-      border: 2px solid var(--main-color);
-      border-radius: 12px;
-      color: var(--main-color);
+      margin: 0.5rem;
       text-decoration: none;
-      font-weight: 600;
-      transition: all 0.25s ease;
+      color: white;
+      background: var(--accent);
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+      transition: background 0.3s;
     }
 
     .links a:hover {
-      background: var(--main-color);
-      color: white;
+      background: #6b90d4;
     }
 
     .compliment {
-      margin-top: 1.5em;
       font-style: italic;
-      color: #475569;
-      max-width: 300px;
-      min-height: 2em;
+      margin-top: 1.5rem;
+      opacity: 1;
+      transition: opacity 0.5s ease;
     }
 
-    .decor {
+    /* animated background elements */
+    .blob {
       position: absolute;
-      z-index: -1;
-      width: 400px;
-      height: 400px;
-      background: rgba(147, 197, 253, 0.4);
-      filter: blur(100px);
+      width: 300px;
+      height: 300px;
+      background: var(--accent);
       border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.3;
+      animation: float 20s infinite alternate ease-in-out;
+      z-index: 0;
+    }
+
+    .blob:nth-child(1) {
       top: -100px;
       left: -100px;
-      animation: float 6s ease-in-out infinite;
+    }
+
+    .blob:nth-child(2) {
+      bottom: -100px;
+      right: -100px;
+      animation-delay: 5s;
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(10px); }
-    }
-
-    @media (max-width: 500px) {
-      .avatar {
-        width: 100px;
-        height: 100px;
+      0% {
+        transform: translateY(0) translateX(0);
+      }
+      100% {
+        transform: translateY(50px) translateX(30px);
       }
     }
+
   </style>
 </head>
 <body>
-  <div class="decor"></div>
 
-  <img class="avatar" src="icon.jpg" alt="Аватар">
-  <h1>Привет 👋</h1>
-  <p>Ты красивая.</p>
-  <p>Если хочешь познакомиться — напиши.</p>
+  <div class="blob"></div>
+  <div class="blob"></div>
 
-  <div class="links">
-    <a href="https://t.me/ikihitaro" target="_blank">Telegram</a>
-    <a href="https://instagram.com/ikihitaro" target="_blank">Instagram</a>
+  <div class="card">
+    <img class="avatar" src="icon.jpg" alt="Аватар">
+    <h1>Привет! Ты красивая 😎<br> Хочешь познакомиться — напиши!</h1>
+    <div class="links">
+      <a href="https://t.me/ikihitaro" target="_blank">Telegram</a>
+      <a href="https://instagram.com/ikihitaro" target="_blank">Instagram</a>
+    </div>
+    <div class="compliment" id="compliment"></div>
   </div>
-
-  <div class="compliment" id="comp"></div>
 
   <script>
     const compliments = [
-      "Ты реально выделяешься.",
-      "С тобой, наверное, очень уютно.",
-      "Ты выглядишь как человек, с которым хочется говорить.",
-      "Кажется, ты тот, кто делает день лучше.",
-      "Ты красивее, чем любой фильтр.",
-      "Твоя энергия ощущается даже отсюда.",
-      "Тебя хочется слушать. Даже молча.",
-      "Ты как багет из духовки — свежая и тёплая.",
-      "У тебя своя атмосфера. И она топ.",
-      "Ты ярче, чем мой CSS.",
-      "Ты не случайно это увидела.",
-      "У тебя особый вайб. Это видно сразу.",
-      "Ты выглядишь, будто несёшь что-то светлое.",
-      "Ты стильная и не знаешь об этом. Или знаешь.",
-      "Ты бы понравилась даже мне в плохом настроении.",
-      "Скорее всего, ты не только красивая, но и умная.",
-      "Тебе идёт быть собой.",
-      "Твои вибрации мощные. Приятные.",
-      "Ты как музыка — сложно объяснить, но хочется слушать.",
-      "Ты — повод кому-то улыбнуться. Возможно, мне."
+      "У тебя очень добрые глаза",
+      "Твоя улыбка делает день ярче",
+      "Ты точно особенная 🌟",
+      "Ты выглядишь потрясающе",
+      "Ты невероятно обаятельна",
+      "С тобой хочется говорить и говорить",
+      "Ты прямо как солнечный свет ☀️",
+      "У тебя стиль и вкус 😎",
+      "Ты будто из сна",
+      "Очень приятно просто видеть тебя",
+      "Ты — вдохновение",
+      "Твоя энергия чувствуется даже через экран",
+      "Ты яркая, как весна 🌸",
+      "Ты как кофе с ванилью — мягкая и бодрая ☕",
+      "С тобой легко и спокойно",
+      "Ты создаёшь хорошее настроение",
+      "Ты — как музыка, которую хочется слушать снова",
+      "Ты определённо запомнишься",
+      "Просто спасибо, что ты есть",
+      "Красота у тебя не только снаружи"
     ];
 
-    const target = document.getElementById("comp");
-    const text = compliments[Math.floor(Math.random() * compliments.length)];
+    const el = document.getElementById("compliment");
 
-    let i = 0;
-    const typer = () => {
-      if (i < text.length) {
-        target.textContent += text.charAt(i);
-        i++;
-        setTimeout(typer, 25);
-      }
-    };
-    typer();
+    function showRandomCompliment() {
+      el.style.opacity = 0;
+      setTimeout(() => {
+        const random = compliments[Math.floor(Math.random() * compliments.length)];
+        el.textContent = random;
+        el.style.opacity = 1;
+      }, 500);
+    }
+
+    showRandomCompliment();
+    setInterval(showRandomCompliment, 10000);
   </script>
+
 </body>
 </html>
