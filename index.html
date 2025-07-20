@@ -2,13 +2,14 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Привет</title>
+  <title>Визитка</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --main-color: #1e3a8a;
-      --bg-gradient: linear-gradient(to bottom right, #dbeafe, #eff6ff);
+      --bg1: #dbeafe;
+      --bg2: #eff6ff;
     }
 
     * {
@@ -19,7 +20,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
-      background: var(--bg-gradient);
+      background: linear-gradient(to bottom right, var(--bg1), var(--bg2));
       color: var(--main-color);
       display: flex;
       flex-direction: column;
@@ -27,17 +28,32 @@
       justify-content: center;
       min-height: 100vh;
       text-align: center;
-      animation: fadeIn 1s ease-in;
+      overflow-x: hidden;
+    }
+
+    .avatar {
+      margin-top: 30px;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 3px solid var(--main-color);
+      object-fit: cover;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      animation: float 3s ease-in-out infinite;
     }
 
     h1 {
       font-size: 2em;
-      margin-bottom: 0.3em;
+      margin: 20px 0 10px;
     }
 
     p {
       font-size: 1.1em;
-      margin: 0.3em;
+      margin: 4px 0;
+    }
+
+    .links {
+      margin-top: 20px;
     }
 
     .links a {
@@ -49,7 +65,7 @@
       color: var(--main-color);
       text-decoration: none;
       font-weight: 600;
-      transition: 0.25s ease;
+      transition: all 0.25s ease;
     }
 
     .links a:hover {
@@ -65,13 +81,36 @@
       min-height: 2em;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .decor {
+      position: absolute;
+      z-index: -1;
+      width: 400px;
+      height: 400px;
+      background: rgba(147, 197, 253, 0.4);
+      filter: blur(100px);
+      border-radius: 50%;
+      top: -100px;
+      left: -100px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
+
+    @media (max-width: 500px) {
+      .avatar {
+        width: 100px;
+        height: 100px;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="decor"></div>
+
+  <img class="avatar" src="icon.jpg" alt="Аватар">
   <h1>Привет 👋</h1>
   <p>Ты красивая.</p>
   <p>Если хочешь познакомиться — напиши.</p>
@@ -85,11 +124,26 @@
 
   <script>
     const compliments = [
-      "С тобой явно интересно, даже если мы ещё не знакомы.",
-      "Ты ярче, чем весь мой CSS.",
-      "Ты точно не случайно это увидела :)",
-      "Твоя энергия чувствуется даже через экран.",
-      "Ты выглядишь как уверенная легенда."
+      "Ты реально выделяешься.",
+      "С тобой, наверное, очень уютно.",
+      "Ты выглядишь как человек, с которым хочется говорить.",
+      "Кажется, ты тот, кто делает день лучше.",
+      "Ты красивее, чем любой фильтр.",
+      "Твоя энергия ощущается даже отсюда.",
+      "Тебя хочется слушать. Даже молча.",
+      "Ты как багет из духовки — свежая и тёплая.",
+      "У тебя своя атмосфера. И она топ.",
+      "Ты ярче, чем мой CSS.",
+      "Ты не случайно это увидела.",
+      "У тебя особый вайб. Это видно сразу.",
+      "Ты выглядишь, будто несёшь что-то светлое.",
+      "Ты стильная и не знаешь об этом. Или знаешь.",
+      "Ты бы понравилась даже мне в плохом настроении.",
+      "Скорее всего, ты не только красивая, но и умная.",
+      "Тебе идёт быть собой.",
+      "Твои вибрации мощные. Приятные.",
+      "Ты как музыка — сложно объяснить, но хочется слушать.",
+      "Ты — повод кому-то улыбнуться. Возможно, мне."
     ];
 
     const target = document.getElementById("comp");
@@ -100,7 +154,7 @@
       if (i < text.length) {
         target.textContent += text.charAt(i);
         i++;
-        setTimeout(typer, 30);
+        setTimeout(typer, 25);
       }
     };
     typer();
