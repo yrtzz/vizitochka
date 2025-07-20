@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Привет</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-color: #1e3a8a;
+      --bg-gradient: linear-gradient(to bottom right, #dbeafe, #eff6ff);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--main-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      animation: fadeIn 1s ease-in;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 0.3em;
+    }
+
+    p {
+      font-size: 1.1em;
+      margin: 0.3em;
+    }
+
+    .links a {
+      display: inline-block;
+      margin: 0.5em;
+      padding: 0.5em 1.2em;
+      border: 2px solid var(--main-color);
+      border-radius: 12px;
+      color: var(--main-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.25s ease;
+    }
+
+    .links a:hover {
+      background: var(--main-color);
+      color: white;
+    }
+
+    .compliment {
+      margin-top: 1.5em;
+      font-style: italic;
+      color: #475569;
+      max-width: 300px;
+      min-height: 2em;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Привет 👋</h1>
+  <p>Ты красивая.</p>
+  <p>Если хочешь познакомиться — напиши.</p>
+
+  <div class="links">
+    <a href="https://t.me/ikihitaro" target="_blank">Telegram</a>
+    <a href="https://instagram.com/ikihitaro" target="_blank">Instagram</a>
+  </div>
+
+  <div class="compliment" id="comp"></div>
+
+  <script>
+    const compliments = [
+      "С тобой явно интересно, даже если мы ещё не знакомы.",
+      "Ты ярче, чем весь мой CSS.",
+      "Ты точно не случайно это увидела :)",
+      "Твоя энергия чувствуется даже через экран.",
+      "Ты выглядишь как уверенная легенда."
+    ];
+
+    const target = document.getElementById("comp");
+    const text = compliments[Math.floor(Math.random() * compliments.length)];
+
+    let i = 0;
+    const typer = () => {
+      if (i < text.length) {
+        target.textContent += text.charAt(i);
+        i++;
+        setTimeout(typer, 30);
+      }
+    };
+    typer();
+  </script>
+</body>
+</html>
